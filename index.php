@@ -26,21 +26,15 @@
                     <div class="form-group">
                       <label for="targettemp">Target Temperature</label>
                       <input type="number" min="0" max="200" step=".1"  class="form-control" name="targettemperature" aria-describedby="" placeholder="Enter Target Temperature">
-                      <input type="hidden" name="hiddenval" value="hiddenValue">
+                      
                     </div>
 
 
-                    <button type="submit" class="btn btn-primary">Submit</button> <span class='btn btn-default' onclick='jsondata()'>JSON</span>
+                    <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             </div>
 
-<script >
-function jsondata(){
-  var formData=JSON.stringify($("#targettempform").serializeArray());
-  alert(formData);
-}
 
-</script>
 
           </div>
           <div class='row'>
