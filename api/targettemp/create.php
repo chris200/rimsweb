@@ -6,7 +6,6 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-
 // get database connection
 include_once '../config/database.php';
 
@@ -19,33 +18,22 @@ $db = $database->getConnection();
 $product = new Targettemp($db);
 
 // get posted data
-$filecontent=file_get_contents("php://input");
-
-$targettemperature=$_POST['targettemperature'];
-//echo "target temp " . $targettemperature;
-
-//print_r("filecontent ");
-//print_r($filecontent);
-//print_r(" ");
-//$data = json_decode($filecontent);
-
-$data="{'targettemperature':".$targettemperature."}";
-//$data = json_decode(file_get_contents("php://input"));
-//print_r("DATA ");
-print_r($data);
-//print_r(" ");
+$data=file_get_contents("php://input");
+print_r( $data );
+$data = json_decode(file_get_contents("php://input"));
+//$data = json_encode( $_REQUEST);
+//$data=$_REQUEST;
+//print_r( $_REQUEST);
+print_r( $data );
 // make sure data is not empty
+//print_r($data);
 if(
     !empty($data->targettemperature)
-
 ){
-echo "<script>alert('Not Empty');</script>";
+
     // set product property values
     $product->targettemperature = $data->targettemperature;
-    // $product->price = $data->price;
-    // $product->description = $data->description;
-    // $product->category_id = $data->category_id;
-    // $product->created = date('Y-m-d H:i:s');
+print_r($product);
 
     // create the product
     if($product->create()){
@@ -76,6 +64,5 @@ else{
 
     // tell the user
     echo json_encode(array("message" => "Unable to create product. Data is incomplete."));
-
 }
 ?>
