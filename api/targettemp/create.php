@@ -18,22 +18,24 @@ $db = $database->getConnection();
 $product = new Targettemp($db);
 
 // get posted data
-$data=file_get_contents("php://input");
-print_r( $data );
-$data = json_decode(file_get_contents("php://input"));
-//$data = json_encode( $_REQUEST);
-//$data=$_REQUEST;
-//print_r( $_REQUEST);
-print_r( $data );
+//$data = json_decode(file_get_contents("php://input"));
+$targettemperature=$_POST['targettemperature'];
+//$data=['targettemperature']->$targettemperature;
+
+//print_r("php://input");
+
+
+$data->targettemperature=$targettemperature;
+print_r($data);
+//print_r($data->targettemperature);
 // make sure data is not empty
-//print_r($data);
 if(
     !empty($data->targettemperature)
 ){
 
     // set product property values
     $product->targettemperature = $data->targettemperature;
-print_r($product);
+
 
     // create the product
     if($product->create()){
@@ -43,6 +45,7 @@ print_r($product);
 
         // tell the user
         echo json_encode(array("message" => "Product was created."));
+
     }
 
     // if unable to create the product, tell the user

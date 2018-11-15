@@ -20,7 +20,7 @@ function read(){
 
       // select all query
       $query = "SELECT
-                   p.indexID, p.timestamp, p.targettemperature
+                p.targettemperature
               FROM
                   " . $this->table_name . " p
                   order by
